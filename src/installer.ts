@@ -179,9 +179,9 @@ export async function installTool(
       await ghcup(tool, version, os, arch);
       break;
     case 'win32':
-      await choco(tool, version);
-      if (await isInstalled(tool, version, os, arch)) return;
       await ghcup(tool, version, os, arch);
+      if (await isInstalled(tool, version, os, arch)) return;
+      await choco(tool, version);
       break;
     case 'darwin':
       await ghcup(tool, version, os, arch);

@@ -35156,10 +35156,10 @@ async function installTool(tool, version, os, arch) {
             await ghcup(tool, version, os, arch);
             break;
         case 'win32':
-            await choco(tool, version);
+            await ghcup(tool, version, os, arch);
             if (await isInstalled(tool, version, os, arch))
                 return;
-            await ghcup(tool, version, os, arch);
+            await choco(tool, version);
             break;
         case 'darwin':
             await ghcup(tool, version, os, arch);
