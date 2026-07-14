@@ -35780,6 +35780,13 @@ async function run(inputs) {
                 if (opts.cabal.update && !opts.stack.enable)
                     await (0, exec_1.exec)('cabal update');
             });
+        await core.group('Installing Node.js 24', async () => {
+            await (0, exec_1.exec)('bash', [
+                '-c',
+                'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash'
+            ]);
+            await (0, exec_1.exec)('bash', ['-c', '. "$HOME/.nvm/nvm.sh" && nvm install 24']);
+        });
         core.info(`##[add-matcher]${path.join(__dirname, '..', 'matcher.json')}`);
     }
     catch (_error) {

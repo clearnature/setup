@@ -129,6 +129,14 @@ export default async function run(
         if (opts.cabal.update && !opts.stack.enable) await exec('cabal update');
       });
 
+    await core.group('Installing Node.js 24', async () => {
+      await exec('bash', [
+        '-c',
+        'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash'
+      ]);
+      await exec('bash', ['-c', '. "$HOME/.nvm/nvm.sh" && nvm install 24']);
+    });
+
     core.info(`##[add-matcher]${path.join(__dirname, '..', 'matcher.json')}`);
   } catch (_error) {
     const error = ensureError(_error);
